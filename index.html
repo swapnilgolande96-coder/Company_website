@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Tech Innovation | Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-orange: #ff6600; 
+            --brand-black: #1a1a1a;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --nav-bg: #ffffff;
+        }
+
+        .dark-theme {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-sub: #b0b0b0;
+            --nav-bg: #1a1a1a;
+            --brand-black: #ffffff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            background: var(--bg-color);
+            transition: 0.3s;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: var(--nav-bg);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #33333333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--brand-orange); }
+
+        #theme-icon {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--brand-orange);
+            margin-left: 20px;
+        }
+
+        .page {
+            display: none; 
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s;
+        }
+
+        #home:target, #about:target, #services:target, #campus:target, #contact:target { display: block !important; }
+        #home { display: block; }
+        :target ~ #home { display: none; }
+        #home:target { display: block; }
+
+        /* --- LOGO STYLE --- */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .as-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .logo-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .letter-a-big {
+            font-size: 140px;
+            font-weight: 900;
+            font-family: 'Arial Black', sans-serif;
+            line-height: 0.8;
+            color: var(--brand-black);
+            margin-right: -10px;
+            z-index: 2;
+        }
+
+        .letter-s-big {
+            font-size: 140px;
+            font-weight: 900;
+            font-family: 'Arial Black', sans-serif;
+            line-height: 0.8;
+            color: var(--brand-orange);
+            z-index: 1;
+        }
+
+        .sub-text {
+            font-size: 18px;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .sub-a { color: var(--brand-black); }
+        .sub-s { color: var(--brand-orange); }
+
+        .brand-name-centered {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-black);
+            margin: 20px 0 0 0;
+            text-transform: uppercase;
+        }
+
+        .btn-action {
+            background: var(--brand-orange);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 25px;
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skills-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .skill-item {
+            text-align: center;
+            width: 100px;
+        }
+        .skill-item i {
+            font-size: 2.5rem;
+            color: var(--brand-orange);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .skill-item span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .card-container { display: flex; gap: 25px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            border: 1px solid #33333322;
+        }
+        .card i { font-size: 3.5rem; color: var(--brand-orange); margin-bottom: 20px; }
+
+        /* --- CAMPUS SECTION STYLES --- */
+        .campus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .campus-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #33333322;
+            transition: 0.3s;
+        }
+        .campus-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .campus-card img { width: 100%; height: 230px; object-fit: cover; }
+        .campus-info { padding: 20px; text-align: left; }
+        .campus-info h3 { color: var(--brand-orange); margin: 0 0 10px 0; font-size: 1.25rem; }
+        .campus-info p { font-size: 0.9rem; line-height: 1.5; color: var(--text-sub); }
+
+        /* --- SOCIAL ACTION LABELS --- */
+        .social-cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .social-cta-item {
+            text-decoration: none;
+            color: var(--text-main);
+            padding: 12px;
+            border: 1px solid #33333322;
+            border-radius: 8px;
+            transition: 0.3s;
+            background: var(--card-bg);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .social-cta-item:hover {
+            border-color: var(--brand-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid #33333322; background: var(--nav-bg); margin-top: 50px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body id="body">
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#campus">Campus</a>
+        <a href="#contact">Contact</a>
+        <i class="fas fa-moon" id="theme-icon" onclick="toggleTheme()"></i>
+    </nav>
+
+    <main>
+        <section id="about" class="page">
+            <h2 style="color: var(--brand-orange);">About AS Tech</h2>
+            <p style="line-height: 1.8; font-size: 1.1rem;">
+                <strong>AS Tech Innovation</strong> has been a leader in digital excellence <strong>Since 2026</strong>. We specialize in building <em>Adaptive Systems</em> that combine human creativity with the power of intelligent software.
+            </p>
+            
+            <h3 style="text-align: center; margin-top: 50px;">Our Technical Expertise</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-docker"></i>
+                    <span>Docker</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-aws"></i>
+                    <span>AWS</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-server"></i>
+                    <span>DevOps</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#services" class="btn-action">View Services</a>
+            </div>
+        </section>
+
+        <section id="services" class="page">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">Our Services</h2>
+            <div class="card-container">
+                <div class="card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Web Development</h3>
+                    <p>We provide comprehensive full-stack web development services designed to help your brand stand out with robust architectures.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI Consulting</h3>
+                    <p>Our AI specialists help you integrate smart automation and machine learning into your existing business workflows.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Cloud Security</h3>
+                    <p>Protecting your digital assets with military-grade encryption and secure cloud architecture to safeguard your sensitive data.</p>
+                </div>
+            </div>
+            <div style="text-align: center;"><a href="#campus" class="btn-action">View Campus</a></div>
+        </section>
+
+        <section id="campus" class="page">
+            <h2 style="text-align: center; font-size: 2.5rem; color: var(--brand-orange);">AS Tech Innovation Campus</h2>
+            <div class="campus-grid">
+                <div class="campus-card">
+               <img src="https://www.decorilla.com/online-decorating/wp-content/uploads/2024/09/A-clutter-free-workspace-with-inspiring-zen-office-wall-decor-by-Decorilla-1024x574.jpeg" alt="Workspace with zen office wall decor">
+                    <div class="campus-info"><h3>CEO OFFICE</h3><p>This minimalist,
+
+Zen-inspired CEO executive suite is meticulously designed for professional leadership and strategic clarity. It fosters a calm, clutter-free environment essential for high-level decision-making and optimal productivity in a modern corporate setting.</p></div>
+                </div>
+                <div class="campus-card">
+              <img src="https://i.pinimg.com/474x/b8/16/fb/b816fb2b27e70c7f1f8bad37ab2a3e87.jpg">
+                    <div class="campus-info"><h3>CONFERENCE HALL</h3><p>This conference room is designed for professional collaboration and strategic planning within a focused, local corporate environment. It provides a functional and organized space equipped for team discussions, client presentations, and collective decision-making.</p></div>
+                </div>
+                <div class="campus-card">
+                <img src="https://i.pinimg.com/474x/45/4b/17/454b1719f90741fafa42922f4adfd9de.jpg" alt="Image from Pinterest">
+                    <div class="campus-info"><h3>STAFF CAFETERIA</h3><p>This office cafeteria offers a modern and inviting breakout space designed to foster employee relaxation and spontaneous team collaboration. It features a clean, functional layout that balances comfort with a professional aesthetic, making it an ideal environment for refreshment and casual networking.</p></div>
+                </div>
+                <div class="campus-card">
+                   <img src="https://i.pinimg.com/originals/e5/65/85/e5658571e8f1b2ed24e26bf86b1ca4e2.jpg" alt="Pinterest Image">
+                    <div class="campus-info"><h3>CORPORATE CAMPUS</h3><p>This corporate campus features a modern, integrated architectural design that provides a professional and sustainable environment for business operations. It combines functional workspaces with open green areas to foster innovation, productivity, and a collaborative community atmosphere for all employees.</p></div>
+                </div>
+                <div class="campus-card">
+               <img src="https://i.pinimg.com/236x/2a/42/13/2a421360ede1125ec1f5de4b625fe98e.jpg" alt="Pinterest Image">
+                    <div class="campus-info"><h3>WORK PLACE</h3><p>This collaborative workspace is designed to boost productivity through a modern, open-plan layout that encourages seamless communication among team members. It provides a professional and organized environment equipped with the essential infrastructure to support both individual focus and creative group projects.</p></div>
+                </div>
+                <div class="campus-card">
+            </div>
+            <div style="text-align: center;"><a href="#contact" class="btn-action">Contact Us</a></div>
+        </section>
+
+        <section id="contact" class="page">
+            <h2 style="text-align: center;">Get In Touch</h2>
+            <form style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" placeholder="Your Name" style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                <input type="email" placeholder="Your Email" style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                <textarea placeholder="How can we help?" rows="5" style="padding: 15px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                <button type="button" class="btn-action">Send Message</button>
+            </form>
+            <div style="margin-top: 40px; text-align: center; border-top: 2px solid var(--brand-orange); padding-top: 20px;">
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@astechinnovation.com</p>
+                <p><i class="fas fa-map-marker-alt"></i><strong> AS Tech Corporate Plaza</strong>, Survey No. 42, Phaltan-Satara Highway, Near Ring Road Junction, Phaltan - 415523, Dist. Satara, Maharashtra</p></p>
+                
+                <div class="social-cta-grid">
+                    <a href="#" class="social-cta-item"><i class="fab fa-whatsapp" style="color: #25D366;"></i> Chat with us on WhatsApp</a>
+                    <a href="#" class="social-cta-item"><i class="fab fa-instagram" style="color: #E1306C;"></i> Follow us on Instagram</a>
+                    <a href="#" class="social-cta-item"><i class="fab fa-linkedin" style="color: #0077B5;"></i> Connect on LinkedIn</a>
+                    <a href="#" class="social-cta-item"><i class="fab fa-github" style="color: #333;"></i> Code with us on GitHub</a>
+                    <a href="#" class="social-cta-item"><i class="fab fa-docker" style="color: #2496ED;"></i> Deploy with Docker</a>
+                    <a href="#" class="social-cta-item"><i class="fab fa-youtube" style="color: #FF0000;"></i> Watch on YouTube</a>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="#home" class="btn-action" style="background: var(--brand-black);">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="home" class="page">
+            <div class="hero-section">
+                <div class="as-logo-container">
+                    <div class="logo-group">
+                        <span class="letter-a-big">A</span>
+                        <span class="sub-text sub-a">Adaptive</span>
+                    </div>
+                    <div class="logo-group">
+                        <span class="letter-s-big">S</span>
+                        <span class="sub-text sub-s">Systems</span>
+                    </div>
+                </div>
+                <h1 class="brand-name-centered">AS Tech Innovation</h1>
+                <a href="#about" class="btn-action">Explore Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" title="AWS"><i class="fab fa-aws"></i></a>
+            <a href="#" title="Docker"><i class="fab fa-docker"></i></a>
+            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        &copy; 2026 AS Tech Innovation. All Rights Reserved.
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.getElementById('body');
+            const icon = document.getElementById('theme-icon');
+            body.classList.toggle('dark-theme');
+            if(body.classList.contains('dark-theme')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+    </script>
+</body>
+</html>
